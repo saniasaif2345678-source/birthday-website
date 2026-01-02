@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, .cursive-font {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Custom Confetti Canvas Styling */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .photo-frame {
+            transition: transform 0.3s ease;
+        }
+        .photo-frame:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .hidden-message {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen flex flex-col items-center">
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center p-4 w-full relative">
+        <div class="absolute top-10 left-10 text-pink-400 animate-float opacity-50">
+            <i data-lucide="heart" size="48"></i>
+        </div>
+        <div class="absolute bottom-10 right-10 text-purple-400 animate-float opacity-50" style="animation-delay: 1s;">
+            <i data-lucide="stars" size="48"></i>
+        </div>
+
+        <div class="z-10 max-w-2xl">
+            <p class="text-xl md:text-2xl text-pink-500 font-medium mb-4 tracking-widest uppercase">It's a Special Day</p>
+            <h1 class="text-6xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 mb-6 drop-shadow-sm">
+                Happy Birthday!
+            </h1>
+            <h2 class="text-4xl md:text-5xl text-gray-700 mb-8">Boss's Queen</h2> <!-- CHANGE NAME HERE -->
+            
+            <button onclick="triggerSurprise()" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 flex items-center gap-2 mx-auto">
+                <i data-lucide="gift"></i> Make a Wish
+            </button>
+        </div>
+
+        <div class="absolute bottom-10 animate-bounce text-gray-400">
+            <p class="text-sm">Scroll Down</p>
+            <i data-lucide="chevron-down" class="mx-auto mt-1"></i>
+        </div>
+    </section>
+
+    <!-- Photo Gallery / Memories -->
+    <section class="w-full max-w-6xl mx-auto py-20 px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl text-pink-500 mb-4">Beautiful Memories</h2>
+            <p class="text-gray-500">Collecting moments, not things.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Photo 1 Placeholder -->
+            <div class="photo-frame glass-card p-4 rounded-2xl transform rotate-[-3deg]">
+                <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden relative group">
+                     <!-- Replace src below with actual image URL -->
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Memory 1" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
+                </div>
+                <p class="mt-4 text-center font-handwriting text-gray-600">The best smile :)</p>
+            </div>
+
+            <!-- Photo 2 Placeholder (Center) -->
+            <div class="photo-frame glass-card p-4 rounded-2xl z-10 transform scale-105 shadow-2xl">
+                <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden relative">
+                    <!-- Replace src below with actual image URL -->
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Birthday Girl" class="w-full h-full object-cover">
+                </div>
+                <p class="mt-4 text-center font-bold text-pink-500">Queen of the Day 👑</p>
+            </div>
+
+            <!-- Photo 3 Placeholder -->
+            <div class="photo-frame glass-card p-4 rounded-2xl transform rotate-[3deg]">
+                <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden relative">
+                    <!-- Replace src below with actual image URL -->
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Memory 3" class="w-full h-full object-cover">
+                </div>
+                <p class="mt-4 text-center font-handwriting text-gray-600">Always Shining ✨</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message Card -->
+    <section class="w-full py-20 px-4 bg-white bg-opacity-50">
+        <div class="max-w-3xl mx-auto glass-card p-8 md:p-12 rounded-3xl text-center relative overflow-hidden" id="message-section">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-pink-300 rounded-full filter blur-3xl opacity-30"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-300 rounded-full filter blur-3xl opacity-30"></div>
+            
+            <i data-lucide="quote" class="mx-auto text-pink-400 mb-6 w-10 h-10"></i>
+            
+            <div class="hidden-message" id="birthday-msg">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">To the most amazing person...</h2>
+                <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
+                    May your day be filled with as much happiness as you bring to everyone around you. 
+                    Wishing you love, laughter, and a year full of adventures. You deserve the world and more!
+                </p>
+                <p class="text-xl cursive-font text-pink-600 text-3xl">- From [Your Name/Boss Name]</p>
+            </div>
+            
+            <button id="reveal-btn" onclick="revealMessage()" class="mt-8 text-pink-500 hover:text-pink-700 font-semibold underline decoration-wavy underline-offset-4">
+                Click to read message
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-400 text-sm">
+        <p>Made with ❤️ for a special celebration</p>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Confetti Logic
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let confetti = [];
+        const confettiCount = 300;
+        const gravity = 0.5;
+        const terminalVelocity = 5;
+        const drag = 0.075;
+        const colors = [
+        { front: '#ffc107', back: '#ff9800' }, // Gold
+        { front: '#e91e63', back: '#c2185b' }, // Pink
+        { front: '#9c27b0', back: '#7b1fa2' }, // Purple
+        { front: '#00bcd4', back: '#0097a7' }  // Cyan
+        ];
+
+        resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+
+        randomRange = (min, max) => Math.random() * (max - min) + min;
+
+        initConfetti = () => {
+            for (let i = 0; i < confettiCount; i++) {
+                confetti.push({
+                    color: colors[Math.floor(randomRange(0, colors.length))],
+                    dimensions: {
+                        x: randomRange(10, 20),
+                        y: randomRange(10, 30)
+                    },
+                    position: {
+                        x: randomRange(0, canvas.width),
+                        y: canvas.height - 1
+                    },
+                    rotation: randomRange(0, 2 * Math.PI),
+                    scale: {
+                        x: 1,
+                        y: 1
+                    },
+                    velocity: {
+                        x: randomRange(-25, 25),
+                        y: randomRange(0, -50)
+                    }
+                });
+            }
+        };
+
+        render = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            confetti.forEach((confetto, index) => {
+                let width = (confetto.dimensions.x * confetto.scale.x);
+                let height = (confetto.dimensions.y * confetto.scale.y);
+
+                ctx.translate(confetto.position.x, confetto.position.y);
+                ctx.rotate(confetto.rotation);
+
+                confetto.velocity.x -= confetto.velocity.x * drag;
+                confetto.velocity.y = Math.min(confetto.velocity.y + gravity, terminalVelocity);
+                confetto.velocity.x += Math.random() > 0.5 ? Math.random() : -Math.random();
+
+                confetto.position.x += confetto.velocity.x;
+                confetto.position.y += confetto.velocity.y;
+
+                if (confetto.position.y >= canvas.height) confetti.splice(index, 1);
+
+                if (confetto.position.x > canvas.width) confetto.position.x = 0;
+                if (confetto.position.x < 0) confetto.position.x = canvas.width;
+
+                confetto.scale.y = Math.cos(confetto.position.y * 0.1);
+                ctx.fillStyle = confetto.scale.y > 0 ? confetto.color.front : confetto.color.back;
+
+                ctx.fillRect(-width / 2, -height / 2, width, height);
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+            });
+
+            if (confetti.length > 0) window.requestAnimationFrame(render);
+        };
+
+        // Trigger Confetti on Button Click
+        function triggerSurprise() {
+            confetti = []; // Reset
+            initConfetti();
+            render();
+            
+            // Also play sound if needed (commented out as browser blocks auto audio usually)
+            // var audio = new Audio('happy_birthday.mp3');
+            // audio.play();
+            
+            // Smooth scroll to message
+            document.getElementById('message-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Trigger small confetti on load
+        window.onload = function() {
+            setTimeout(() => {
+                triggerSurprise();
+            }, 500);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        // Message Reveal Logic
+        function revealMessage() {
+            const msg = document.getElementById('birthday-msg');
+            const btn = document.getElementById('reveal-btn');
+            
+            msg.classList.add('reveal');
+            btn.style.display = 'none';
+            
+            // More confetti for the reveal!
+            initConfetti();
+        }
+
+        // Intersection Observer for animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        });
+
+        // Add scroll animation classes to cards
+        document.querySelectorAll('.glass-card').forEach((el) => {
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+
+    </script>
+</body>
+</html>
